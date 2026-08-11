@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PAI METALS - Strength in Every Element</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Oswald:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-bg: #0d0d10;
+            --sidebar-bg: #08080a;
+            --card-bg: #121216;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a5;
+            --accent-gold: #c6a052;
+            --accent-hover: #e0b865;
+            --border-color: #26262d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-primary);
+            display: flex;
+            min-height: 100vh;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Oswald', sans-serif;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Hamburger Menu Icon */
+        .hamburger-menu {
+            position: fixed;
+            top: 25px;
+            left: 30px;
+            z-index: 1000;
+            cursor: pointer;
+            background: var(--sidebar-bg);
+            border: 1px solid var(--border-color);
+            padding: 10px 15px;
+            border-radius: 4px;
+            display: flex;
+            transition: background 0.3s;
+        }
+        
+        .hamburger-menu:hover {
+            background: var(--card-bg);
+        }
+
+        .hamburger-menu i {
+            font-size: 1.5rem;
+            color: var(--accent-gold);
+        }
+
+        /* Sidebar Overlay */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1001;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -320px;
+            width: 320px;
+            background-color: var(--sidebar-bg);
+            height: 100vh;
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            z-index: 1002;
+            transition: left 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+            box-shadow: 10px 0 30px rgba(0,0,0,0.8);
+        }
+        
+        .sidebar.active {
+            left: 0;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-secondary);
+            transition: color 0.3s;
+        }
+
+        .close-btn:hover {
+            color: var(--accent-gold);
+        }
+
+        .sidebar-logo {
+            padding: 40px 30px 30px 30px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: center;
+            background: #fff;
+        }
+
+        .sidebar-logo img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .nav-menu {
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+
+        .nav-menu ul {
+            list-style: none;
+        }
+
+        .nav-menu li {
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .nav-menu a {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+            color: var(--text-primary);
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover, .nav-menu a.active {
+            color: var(--accent-gold);
+        }
+
+        .nav-menu a i {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .sidebar-footer {
+            padding: 30px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--border-color);
+        }
+
+        .contact-item {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .contact-item i {
+            color: var(--text-primary);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .social-icons a {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: var(--accent-gold);
+        }
+
+        /* Main Content */
+        .main-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        /* Top Header */
+        .top-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 50px;
+            padding-left: 100px; /* Offset for hamburger */
+            border-bottom: 1px solid var(--border-color);
+            background-color: var(--primary-bg);
+        }
+        
+        .header-logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .header-logo img {
+            height: 50px;
+            background: white;
+            padding: 5px;
+            border-radius: 4px;
+            object-fit: contain;
+        }
+
+        .header-contact {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            font-size: 0.95rem;
+        }
+        
+        .header-contact div {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .header-contact i {
+            color: var(--text-secondary);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            display: flex;
+            padding: 100px 60px;
+            position: relative;
+            min-height: 600px;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            background-image: url('hero.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center right;
+        }
+
+        .hero-content {
+            flex: 1;
+            z-index: 2;
+            max-width: 600px;
+            padding-left: 40px; /* offset for hamburger alignment */
+        }
+        
+        .hero-tagline {
+            display: inline-block;
+            font-size: 1.2rem;
+            color: var(--accent-gold);
+            margin-bottom: 15px;
+            letter-spacing: 3px;
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+        }
+
+        .hero-subtitle {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            margin-top: 10px;
+            max-width: 520px;
+            line-height: 1.7;
+        }
+
+        .hero-content h1 {
+            font-size: 5.5rem;
+            line-height: 1.05;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .hero-content h1 span {
+            color: var(--accent-gold);
+        }
+
+        .hero-content p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 40px;
+            font-size: 1.15rem;
+            max-width: 500px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 30px;
+            border: 1px solid var(--accent-gold);
+            color: var(--accent-gold);
+            font-family: 'Oswald', sans-serif;
+            font-size: 1rem;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-gold);
+            color: var(--primary-bg);
+        }
+
+        .hero-image {
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+            width: 50%;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 50px;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            max-height: 80%;
+            object-fit: contain;
+            opacity: 0.9;
+        }
+
+        /* Cards Section */
+        .cards-section {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .card {
+            padding: 40px;
+            border-right: 1px solid var(--border-color);
+            transition: background 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:last-child {
+            border-right: none;
+        }
+
+        .card:hover {
+            background-color: var(--card-bg);
+        }
+
+        .card-img-wrapper {
+            width: 100%;
+            height: 180px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        .card-img-wrapper img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            opacity: 0.9;
+            transition: opacity 0.3s;
+        }
+        
+        .card:hover .card-img-wrapper img {
+            opacity: 1;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 30px;
+            flex-grow: 1;
+        }
+
+        .card .arrow {
+            color: var(--accent-gold);
+            font-size: 1.2rem;
+        }
+
+        /* Generic Section Styles */
+        .content-section {
+            padding: 80px 100px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .content-section.alt-bg {
+            background: var(--sidebar-bg);
+        }
+        
+        .section-header {
+            margin-bottom: 50px;
+            max-width: 800px;
+        }
+        
+        .section-header h2 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+        
+        .section-header h2 span {
+            color: var(--accent-gold);
+        }
+        
+        .section-header p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+
+        .two-col-layout {
+            display: flex;
+            gap: 60px;
+            align-items: center;
+        }
+        
+        .two-col-layout.reverse {
+            flex-direction: row-reverse;
+        }
+        
+        .two-col-layout .text-col {
+            flex: 1;
+        }
+        
+        .two-col-layout .img-col {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .two-col-layout .img-col img {
+            max-width: 100%;
+            max-height: 400px;
+            object-fit: contain;
+            border-radius: 4px;
+        }
+        
+        .text-col h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--accent-gold);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 10px;
+        }
+        
+        .text-col p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 25px;
+            font-size: 0.95rem;
+        }
+
+        .styled-list {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+        
+        .styled-list li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        .styled-list li::before {
+            content: '\f105';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: var(--accent-gold);
+        }
+
+        /* Rare Metals Section Details */
+        .rare-metals-layout {
+            display: flex;
+            gap: 60px;
+        }
+
+        .rare-metals-header {
+            width: 250px;
+            flex-shrink: 0;
+        }
+
+        .rare-metals-header h2 {
+            font-size: 3rem;
+            line-height: 1.1;
+            margin-bottom: 25px;
+        }
+        
+        .rare-metals-header h2 span {
+            color: var(--accent-gold);
+            display: block;
+        }
+
+        .rare-metals-header p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 40px;
+        }
+
+        .rare-metals-list-wrapper {
+            flex-grow: 1;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            column-gap: 40px;
+            row-gap: 15px;
+            padding: 0 40px;
+            border-right: 1px solid var(--border-color);
+            border-left: 1px solid var(--border-color);
+        }
+
+        .rare-metals-list-wrapper ul {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .rare-metals-list-wrapper li {
+            list-style: none;
+        }
+        
+        .rare-metals-list-wrapper li a {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding-bottom: 8px;
+            cursor: pointer;
+            transition: color 0.2s;
+            text-decoration: none;
+        }
+        
+        .rare-metals-list-wrapper li a:hover {
+            color: var(--accent-gold);
+        }
+
+        .rare-metals-list-wrapper li a:after {
+            content: '\f105';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: var(--accent-gold);
+            opacity: 0.7;
+        }
+
+        .features-list {
+            width: 300px;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 40px;
+        }
+        
+        .feature-item {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .feature-icon {
+            color: var(--accent-gold);
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+
+        .feature-item h4 {
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+        }
+
+        .feature-item p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* Welcome Section */
+        .welcome-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .welcome-text {
+            padding: 80px 100px;
+            border-right: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .welcome-text h2 {
+            font-size: 3rem;
+            margin-bottom: 40px;
+            line-height: 1.1;
+        }
+
+        .welcome-text h2 span {
+            color: var(--accent-gold);
+            display: block;
+        }
+
+        .welcome-text p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            margin-bottom: 25px;
+            line-height: 1.7;
+        }
+        
+        .welcome-text .btn {
+            margin-top: 20px;
+        }
+
+        .welcome-images {
+            /* use local lab image as background instead of white box */
+            background-image: url('welcome.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            min-height: 420px;
+            width: 100%;
+        }
+        
+        /* Procedure Section */
+        .procedure-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        .proc-box {
+            background: var(--card-bg);
+            padding: 40px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+        }
+        .proc-box h3 {
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+        .proc-box p, .proc-box li {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 60px 100px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border-color);
+            background: linear-gradient(90deg, rgba(18,18,22,1) 0%, rgba(8,8,10,1) 100%);
+        }
+        
+        .cta-content {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+        
+        .cta-image {
+            width: 150px;
+            height: 100px;
+            border-radius: 4px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .cta-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .cta-text h3 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        
+        .cta-text h3 span {
+            color: var(--accent-gold);
+        }
+        
+        .cta-text p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        /* Footer */
+        .footer-section {
+            padding: 60px 100px;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr 1.5fr;
+            gap: 30px;
+            background: var(--sidebar-bg);
+        }
+        
+        .footer-brand p {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin-top: 40px;
+        }
+
+        .footer-col h5 {
+            color: var(--text-primary);
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-col a {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+        
+        .footer-col a:hover {
+            color: var(--accent-gold);
+        }
+        
+        .footer-contact li {
+            display: flex;
+            gap: 15px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        .footer-contact i {
+            color: var(--accent-gold);
+            margin-top: 4px;
+        }
+        
+        .footer-bottom {
+            padding: 20px 100px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 30px;
+            background: #050508;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 1024px) {
+            .rare-metals-layout {
+                flex-direction: column;
+            }
+            .rare-metals-header {
+                width: 100%;
+            }
+            .rare-metals-list-wrapper {
+                border: none;
+                padding: 0;
+                margin: 30px 0;
+            }
+            .features-list {
+                width: 100%;
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+            .cards-section {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .footer-section {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hamburger-menu {
+                left: 20px;
+                top: 20px;
+            }
+            .top-header {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 20px 20px 20px 80px;
+                gap: 15px;
+            }
+            .header-logo img {
+                height: 42px;
+            }
+            .header-contact {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            .hero-section {
+                flex-direction: column;
+                padding: 100px 30px 60px;
+                min-height: auto;
+                text-align: left;
+            }
+            .hero-content {
+                padding-left: 0;
+                max-width: 100%;
+            }
+            .hero-content h1 {
+                font-size: 3.5rem;
+            }
+            .hero-image {
+                position: static;
+                width: 100%;
+                height: 350px;
+                padding-right: 0;
+                justify-content: center;
+                margin-top: 40px;
+            }
+            .cards-section {
+                grid-template-columns: 1fr;
+            }
+            .card {
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+            }
+            .content-section {
+                padding: 60px 30px;
+            }
+            .welcome-section {
+                grid-template-columns: 1fr;
+            }
+            .welcome-text {
+                padding: 60px 30px;
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+            }
+            .welcome-images {
+                padding: 30px;
+            }
+            .two-col-layout {
+                flex-direction: column;
+            }
+            .two-col-layout.reverse {
+                flex-direction: column;
+            }
+            .procedure-grid {
+                grid-template-columns: 1fr;
+            }
+            .cta-section {
+                flex-direction: column;
+                padding: 60px 30px;
+                text-align: center;
+                gap: 30px;
+            }
+            .cta-content {
+                flex-direction: column;
+            }
+            .footer-section {
+                grid-template-columns: 1fr;
+                padding: 60px 30px;
+            }
+            .footer-bottom {
+                justify-content: center;
+                padding: 20px 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hamburger Icon -->
+    <div class="hamburger-menu" id="hamburger-btn">
+        <i class="fa-solid fa-bars"></i>
+    </div>
+
+    <!-- Sidebar Overlay -->
+    <div class="overlay" id="sidebar-overlay"></div>
+
+    <!-- Off-canvas Sidebar -->
+    <aside class="sidebar" id="sidebar-menu">
+        <div class="close-btn" id="close-btn"><i class="fa-solid fa-xmark"></i></div>
+        <div class="sidebar-logo">
+            <a href="#home">
+                <img src="paimetals logo.jpeg" alt="PAI METALS ">
+            </a>
+        </div>
+        
+        <nav class="nav-menu">
+            <ul>
+                <li><a href="#home" class="active">HOME <i class="fa-solid fa-chevron-right"></i></a></li>
+                <li><a href="#about">ABOUT US <i class="fa-solid fa-chevron-right"></i></a></li>
+                <li><a href="#antiques">ANTIQUES <i class="fa-solid fa-chevron-right"></i></a></li>
+                <li><a href="#rare-metals">RARE METALS <i class="fa-solid fa-chevron-right"></i></a></li>
+                <li><a href="#lebbo-coin">LEBBO COIN <i class="fa-solid fa-chevron-right"></i></a></li>
+                <li><a href="#procedure">PROCEDURE <i class="fa-solid fa-chevron-right"></i></a></li>
+            </ul>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="contact-item">
+                <i class="fa-solid fa-phone"></i> +91 22 4976 7486 / 87
+            </div>
+            <div class="contact-item">
+                <i class="fa-solid fa-envelope"></i> info@paimetals.com
+            </div>
+            <div class="social-icons">
+                <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                <a href="#"><i class="fa-brands fa-youtube"></i></a>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        
+        <!-- Top Header -->
+        <header class="top-header">
+            <div class="header-logo">
+                <img src="paimetals logo.jpeg" alt="PAI METALS Logo">
+            </div>
+            <div class="header-contact">
+                <div><i class="fa-solid fa-phone"></i> +91 22 4976 7486 / 87</div>
+                <div><i class="fa-solid fa-envelope"></i> info@paimetals.com</div>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section id="home" class="hero-section">
+            <div class="hero-content">
+                <span class="hero-tagline">STRENGTH IN EVERY ELEMENT</span>
+                <h1>RARE BY NATURE.<br><span>VALUABLE</span> BY PURPOSE.</h1>
+                <p class="hero-subtitle">Delivering trusted rare metal sourcing, inspection and certification for industry, research and collectors.</p>
+                <p>PAI METALS is a trusted global supplier of rare metals, precious metals, antiques and related materials for industry, research, investment and collection.</p>
+                <a href="#about" class="btn">EXPLORE OUR WORLD <i class="fa-solid fa-arrow-down"></i></a>
+            </div>
+            <!-- hero background is now set via CSS using local hero.png -->
+        </section>
+
+        <!-- Cards Section -->
+        <section class="cards-section">
+            <div class="card">
+                <div class="card-img-wrapper">
+<img src="ANTIQUE2.png" alt="Antiques Detail 1">                </div>
+                <h3>ANTIQUES</h3>
+                <p>Timeless pieces of art and cultural heritage, meticulously sourced to ensure absolute authenticity and historical significance.</p>
+                <a href="#antiques" class="arrow"><i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+            <div class="card">
+                <div class="card-img-wrapper">
+                     <img src="raremetals.png" alt="Metals">
+                </div>
+                <h3>RARE METALS</h3>
+                <p>Crucial elements for advanced applications, scientific equipment, and specialized industrial processes worldwide.</p>
+                <a href="#rare-metals" class="arrow"><i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+            <div class="card">
+                <div class="card-img-wrapper">
+                                        <img src="lebo.png" alt="Lebo Coin">
+                </div>
+                <h3>LEBBO COIN</h3>
+                <p>Historical coins of immense intrinsic and cultural value, carefully curated from across the globe for collectors.</p>
+                <a href="#lebbo-coin" class="arrow"><i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+            <div class="card">
+                <div class="card-img-wrapper">
+                     <img src="lab.png" alt="Lab Process">
+                </div>
+                <h3>PROCEDURE</h3>
+                <p>A rigorous, transparent process of documentation and execution that we adhere to for every single transaction.</p>
+                <a href="#procedure" class="arrow"><i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </section>
+
+        <!-- Welcome Section (About Us) -->
+        <section id="about" class="welcome-section">
+            <div class="welcome-text">
+                <h2>WELCOME TO<br><span>PAI METALS</span></h2>
+                <p>PAI METALS aims to provide timely, economic, and important industry information for the benefit of our customers. We offer networking opportunities in the global market, bringing together producers, refiners, fabricators, scientists, and financial institutions.</p>
+                <p>We are a central forum for the exchange of information and technology within the precious metals community, promoting efficient and environmentally sound use, reuse, and recycling of materials.</p>
+                <p>We are fully committed to serving our customers with uncompromising integrity, professionalism, and expertise. Thank you for taking the time to explore our world of rare and precious elements.</p>
+            </div>
+            
+            <div class="welcome-images" aria-hidden="true"></div>
+        </section>
+
+        <!-- Antiques Section -->
+        <section id="antiques" class="content-section">
+            <div class="section-header">
+                <h2><span>ANTIQUES</span> COLLECTION</h2>
+                <p>Timeless pieces of art, furniture, and decorative objects that draw a deep historical connection.</p>
+            </div>
+            <div class="two-col-layout">
+                <div class="text-col">
+                    <h3>Time Vs Authenticity</h3>
+                    <p>While an object's age is an important factor, authenticity is the most important element in determining true value. A real antique is an authentic piece, crafted in the era it represents using genuine tools and methods of that time.</p>
+                    <p>Authenticity ultimately determines the actual value of a piece. Any object preserved in its original condition is much more valuable than a piece that has been altered. Refinishing, repairing, or replacing parts of an antique significantly lowers its historical and intrinsic value.</p>
+                    
+                    <h3>Categories of Antiques</h3>
+                    <ul class="styled-list">
+                        <li>Antique Furniture & Furnishings</li>
+                        <li>Antique Jewellery</li>
+                        <li>Antique Collectibles</li>
+                        <li>Antique Automobiles</li>
+                        <li>Antique Metals</li>
+                        <li>Antique Kitchenware</li>
+                    </ul>
+                </div>
+                <!-- Adding 2 small relevant images as requested -->
+                <div class="img-col">
+                    <img src="ANTIQUE.png" alt="Antiques Detail 1">
+                </div>
+            </div>
+        </section>
+
+        <!-- Rare Metals Section -->
+        <section id="rare-metals" class="content-section alt-bg">
+            <div class="rare-metals-layout">
+                <div class="rare-metals-header">
+                    <h2>RARE<br><span>METALS</span></h2>
+                    <p>We supply a wide range of rare metals used in pivotal applications and specialized scientific equipment.</p>
+                </div>
+                
+                <div class="rare-metals-list-wrapper">
+                    <ul>
+                        <li><a href="http://en.wikipedia.org/wiki/Iridium" target="_blank">Iridium</a></li>
+                        <li><a href="http://en.wikipedia.org/wiki/Ruthenium" target="_blank">Ruthenium</a></li>
+                        <li><a href="http://en.wikipedia.org/wiki/Rhodium" target="_blank">Rhodium</a></li>
+                        <li><a href="http://en.wikipedia.org/wiki/Palladium" target="_blank">Palladium</a></li>
+                        <li><a href="http://en.wikipedia.org/wiki/Osmium" target="_blank">Osmium</a></li>
+                        <li><a href="http://en.wikipedia.org/wiki/Rhenium" target="_blank">Rhenium</a></li>
+                        <li><a href="http://en.wikipedia.org/wiki/Scandium" target="_blank">Scandium</a></li>
+                        <li><a href="http://en.wikipedia.org/wiki/Yttrium" target="_blank">Yttrium</a></li>
+                        <li><a href="http://en.wikipedia.org/wiki/Lanthanum" target="_blank">Lanthanum</a></li>
+                    </ul>
+                    <ul>
+                        <li><a href="http://en.wikipedia.org/wiki/Cerium" target="_blank">Cerium</a></li>
+                        <li><a href="http://en.wikipedia.org/wiki/Praseodymium" target="_blank">Praseodymium</a></li>
+                        <li><a href="http://en.wikipedia.org/wiki/Neodymium" target="_blank">Neodymium</a></li>
+                        <li><a href="http://en.wikipedia.org/wiki/Promethium" target="_blank">Promethium</a></li>
+                        <li><a href="http://en.wikipedia.org/wiki/Samarium" target="_blank">Samarium</a></li>
+                        <li><a href="http://en.wikipedia.org/wiki/Europium" target="_blank">Europium</a></li>
+                        <li><a href="http://en.wikipedia.org/wiki/Gadolinium" target="_blank">Gadolinium</a></li>
+                        <li><a href="http://en.wikipedia.org/wiki/Terbium" target="_blank">Terbium</a></li>
+                        <li><a href="http://en.wikipedia.org/wiki/Dysprosium" target="_blank">Dysprosium</a></li>
+                    </ul>
+                    <ul>
+                        <li><a href="http://en.wikipedia.org/wiki/Holmium" target="_blank">Holmium</a></li>
+                        <li><a href="http://en.wikipedia.org/wiki/Erbium" target="_blank">Erbium</a></li>
+                        <li><a href="http://en.wikipedia.org/wiki/Thulium" target="_blank">Thulium</a></li>
+                        <li><a href="http://en.wikipedia.org/wiki/Ytterbium" target="_blank">Ytterbium</a></li>
+                        <li><a href="http://en.wikipedia.org/wiki/Lutetium" target="_blank">Lutetium</a></li>
+                        <li><a href="http://en.wikipedia.org/wiki/Indium" target="_blank">Indium</a></li>
+                        <li><a href="http://en.wikipedia.org/wiki/Gallium" target="_blank">Gallium</a></li>
+                        <li><a href="http://en.wikipedia.org/wiki/Tantalum" target="_blank">Tantalum</a></li>
+                        <li><a href="http://en.wikipedia.org/wiki/Niobium" target="_blank">Niobium</a></li>
+                    </ul>
+                </div>
+    
+                <div class="features-list">
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fa-solid fa-globe"></i></div>
+                        <div>
+                            <h4>GLOBAL SOURCING</h4>
+                            <p>Associated with reliable suppliers and sources worldwide.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                        <div>
+                            <h4>QUALITY ASSURED</h4>
+                            <p>Every material is tested and certified to international standards.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fa-solid fa-truck-fast"></i></div>
+                        <div>
+                            <h4>ON TIME DELIVERY</h4>
+                            <p>Timely and safe delivery with complete documentation.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Lebbo Coin Section -->
+        <section id="lebbo-coin" class="content-section">
+            <div class="section-header">
+                <h2>1616 <span>LEBBO COIN</span></h2>
+                <p>Historical Copper Iridium coins of profound significance and unique properties.</p>
+            </div>
+            <div class="two-col-layout reverse">
+                <div class="text-col">
+                    <h3>Mystical Properties</h3>
+                    <p>Copper Iridium coins are known for their unique properties. According to history, they show remarkable magnetic and elemental phenomena.</p>
+                    
+                    <h3>Facts about the 1616 Coin</h3>
+                    <p>In 1603 AD, the East India Company was formed with establishments across India. By the year 1616 AD, during a complete solar eclipse that lasted for more than 5 hours, specialized Copper coins infused with Copper Iridium were minted. These coins were entirely hand-made in assorted weights and sizes. They represent a unique mix of history, astronomical events, and ancient metallurgy.</p>
+                </div>
+                <div class="img-col">
+                    <img src="lebo.png" alt="Lebbo Coin Details">
+                </div>
+            </div>
+        </section>
+
+        <!-- Procedure Section -->
+        <section id="procedure" class="content-section alt-bg">
+            <div class="section-header">
+                <h2>OUR <span>PROCEDURE</span></h2>
+                <p>A rigorous, transparent process of documentation and execution designed to ensure absolute authenticity and security for all parties involved.</p>
+            </div>
+            
+            <div class="two-col-layout" style="margin-bottom: 40px;">
+                 <div class="img-col" style="flex: unset; width: 100%;">
+                    <img src="lab.png" alt="Lab Process" style="width: 100%; max-height: 500px; object-fit: cover;">
+                 </div>
+            </div>
+
+            <div class="procedure-grid">
+                <div class="proc-box">
+                    <h3>Declaration Requirements</h3>
+                    <p>Each and every beneficiary must submit complete verification documentation before proceeding.</p>
+                    <ul class="styled-list">
+                        <li>Ten passport size photographs</li>
+                        <li>Photo Identity Card like Voters ID, Pan Card, or Driving License</li>
+                        <li>Residential Address Proof for documentation, banking, and taxation formalities</li>
+                    </ul>
+                    <p>Also, exact spot address details, distance from a major Tier 1 city, and Police Station Jurisdiction must be clearly given prior to testing.</p>
+                </div>
+                
+                <div class="proc-box">
+                    <h3>Terms & Conditions</h3>
+                    <ul class="styled-list">
+                        <li>A non-refundable security deposit is required in the company account prior to testing.</li>
+                        <li>Testing locations must be secure, accessible by motorable roads, and within a precise radius approved by the company.</li>
+                        <li>Only two representatives from the owner's side may be present to ensure an uninterrupted testing process.</li>
+                        <li>A finance bond will be issued, valid for 12 hours. If testing fails or material isn't produced, the bond expires.</li>
+                        <li>After successful certification, staggered bank-to-bank payments will be initiated over the next working days. Complete documentation takes approximately 15 to 25 days.</li>
+                    </ul>
+                </div>
+                
+                <div class="proc-box">
+                    <h3>Testing Procedures</h3>
+                    <p>Depending on the specific rare material, our qualified metallurgists will perform a series of tests.</p>
+                    <ul class="styled-list">
+                        <li><strong>Copper Iridium:</strong> Rice pulling tests, water tests, and localized electronic discharge tests.</li>
+                        <li><strong>Corbosol:</strong> Touch tests, flash tests, sound reaction, and rainbow visual tests.</li>
+                        <li><strong>Anti-Mirror / Shadow:</strong> Visibility and shadow directional tests.</li>
+                        <li><strong>Herbals:</strong> Gauge wire cutting speeds and natural healing observations.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="cta-content">
+                <div class="cta-image">
+                     <img src="raremetals2.png" alt="Metals">
+                </div>
+                <div class="cta-text">
+                    <h3>LOOKING FOR A SPECIFIC<br><span>GRADE, SIZE OR QUANTITY?</span></h3>
+                    <p>Tell us what you need.<br>Our team will help you source the right material.</p>
+                </div>
+            </div>
+            <a href="mailto:info@paimetals.com" class="btn">REQUEST A QUOTE <i class="fa-solid fa-envelope"></i></a>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer-section">
+            <div class="footer-brand">
+                <img src="paimetals logo.jpeg" alt="PAI METALS Logo" style="max-width: 200px; background: white; padding: 10px; border-radius: 4px;">
+                <p>© 2024 PAI METALS. All Rights Reserved.</p>
+            </div>
+            
+            <div class="footer-col">
+                <h5>ABOUT US</h5>
+                <ul>
+                    <li><a href="#about">Company Profile</a></li>
+                    <li><a href="#procedure">Our Procedure</a></li>
+                    <li><a href="#">Infrastructure</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h5>PRODUCTS</h5>
+                <ul>
+                    <li><a href="#rare-metals">Rare Metals</a></li>
+                    <li><a href="#">Precious Metals</a></li>
+                    <li><a href="#antiques">Antiques</a></li>
+                    <li><a href="#lebbo-coin">Lebbo Coin</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h5>INDUSTRIES</h5>
+                <ul>
+                    <li><a href="#">Aerospace</a></li>
+                    <li><a href="#">Electronics</a></li>
+                    <li><a href="#">Energy</a></li>
+                    <li><a href="#">Research</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col footer-contact">
+                <h5>CONTACT US</h5>
+                <ul>
+                    <li>
+                        <i class="fa-solid fa-phone"></i> 
+                        <span>+91 22 4976 7486 / 87</span>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-envelope"></i> 
+                        <span>info@paimetals.com</span>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-location-dot"></i> 
+                        <span>Ras Al Khaimah Economic Zone - RAKEZ<br>منطقة رأس الخيمة الاقتصادية - راكز</span>
+                    </li>
+                </ul>
+            </div>
+        </footer>
+        
+        <div class="footer-bottom">
+            <a href="#">PAI METALS © 2024</a>
+            <span>|</span>
+            <a href="#">All Rights Reserved</a>
+        </div>
+        
+    </main>
+
+    <script>
+        // Sidebar Toggle Logic
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        const sidebarMenu = document.getElementById('sidebar-menu');
+        const closeBtn = document.getElementById('close-btn');
+        const sidebarOverlay = document.getElementById('sidebar-overlay');
+        const navLinks = document.querySelectorAll('.nav-menu a');
+
+        function toggleMenu() {
+            sidebarMenu.classList.toggle('active');
+            sidebarOverlay.classList.toggle('active');
+        }
+
+        hamburgerBtn.addEventListener('click', toggleMenu);
+        closeBtn.addEventListener('click', toggleMenu);
+        sidebarOverlay.addEventListener('click', toggleMenu);
+
+        // Close sidebar when clicking a link
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                sidebarMenu.classList.remove('active');
+                sidebarOverlay.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
