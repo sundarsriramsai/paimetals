@@ -837,6 +837,73 @@ a {
     text-transform: uppercase;
 }
 
+.info-card .phone {
+    display: block;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    margin-top: 10px;
+}
+
+.info-card .phone i {
+    color: var(--accent-gold);
+    margin-right: 6px;
+}
+
+.founder-profile {
+    display: flex;
+    gap: 40px;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 40px;
+    max-width: 1000px;
+}
+
+.founder-profile .founder-photo {
+    flex: 0 0 200px;
+}
+
+.founder-profile .founder-photo img {
+    width: 100%;
+    border-radius: 4px;
+    display: block;
+    object-fit: cover;
+}
+
+.founder-profile .founder-body {
+    flex: 1;
+    min-width: 0;
+}
+
+.founder-profile .founder-titles {
+    display: block;
+    color: var(--accent-gold);
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+.founder-profile .founder-tagline {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.2rem;
+    color: var(--text-primary);
+    margin-bottom: 20px;
+}
+
+.founder-profile .founder-contact {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.founder-profile .founder-contact i {
+    color: var(--accent-gold);
+    margin-right: 8px;
+}
+
 .credential-card {
     background: var(--card-bg);
     border: 1px solid var(--border-color);
@@ -1058,6 +1125,14 @@ a {
     }
     .welcome-images {
         padding: 30px;
+    }
+    .founder-profile {
+        flex-direction: column;
+        padding: 30px;
+    }
+    .founder-profile .founder-photo {
+        flex: 0 0 auto;
+        max-width: 180px;
     }
     .two-col-layout {
         flex-direction: column;
